@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'tasks.apps.TasksConfig',
+    'tasks',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +119,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# À la fin du fichier
+DEBUG = False
+
+ALLOWED_HOSTS = ['tonusername.pythonanywhere.com', '127.0.0.1']
+
+# Pour les static files (si tu en ajoutes plus tard)
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'

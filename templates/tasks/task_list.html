@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Mes Tâches{% endblock %}
+
+{% block content %}
+ <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-center border-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Total tâches</h5>
+                    <p class="card-text display-6">{{ total_tasks }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center border-warning">
+                <div class="card-body">
+                    <h5 class="card-title">À faire</h5>
+                    <p class="card-text display-6">{{ todo_tasks }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center border-danger">
+                <div class="card-body">
+                    <h5 class="card-title">En retard</h5>
+                    <p class="card-text display-6">{{ overdue_tasks }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="d-flex justify-content-between align-items-center mb-4">
+   
+    <h1>Mes Tâches</h1>
+    <a href="{% url 'task_create' %}" class="btn btn-success">+ Nouvelle tâche</a>
+</div>
+
+{% if tasks %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Statut</th>
+                    <th>Priorité</th>
+                    <th>Date limite</th>
+                    <th>En retard ?</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                    <tr>
+                        <td>{{ task.title }}</td>
+                        <td>{{ task.description|truncatewords:10 }}</td>
+                        <td>{{ task.get_status_display }}</td>
+                        <td>{{ task.get_priority_display }}</td>
+                        <td>{{ task.due_date|date:"d/m/Y H:i" }}</td>
+                        <td>
+                            {% if task.is_overdue %}
+                                <span class="badge bg-danger">Oui</span>
+                            {% else %}
+                                <span class="badge bg-success">Non</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'task_update' task.pk %}" class="btn btn-sm btn-warning">Modifier</a>
+                            <a href="{% url 'task_delete' task.pk %}" class="btn btn-sm btn-danger">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        Aucune tâche pour le moment. Cliquez sur "Nouvelle tâche" pour commencer !
+    </div>
+{% endif %}
+{% endblock %}

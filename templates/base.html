@@ -22,11 +22,19 @@
                             <span class="nav-link">Bonjour, {{ user.username }}</span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>
+                            <form action="{% url 'logout' %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link btn btn-link text-light p-0 border-0 bg-transparent">
+                                    Déconnexion
+                                </button>
+                            </form>
                         </li>
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">Connexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Inscription</a>
                         </li>
                     {% endif %}
                 </ul>
