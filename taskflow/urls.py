@@ -15,8 +15,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from django.views.generic import RedirectView
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # Authentification (login, logout, password reset, etc.)
+    path('accounts/', include('django.contrib.auth.urls')),
+
+    # On redirige la racine vers la liste des tâches (on créera cette vue après)
+    path('', RedirectView.as_view(url='tasks/', permanent=False)),
+
+    path('tasks/', include('tasks.urls')),
 ]
