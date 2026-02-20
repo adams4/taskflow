@@ -123,7 +123,7 @@ STATIC_URL = 'static/'
 # À la fin du fichier
 DEBUG = False
 
-ALLOWED_HOSTS = ['tonusername.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['adams842.pythonanywhere.com', '127.0.0.1']
 
 # Pour les static files (si tu en ajoutes plus tard)
 STATIC_URL = '/static/'
