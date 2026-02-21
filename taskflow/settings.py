@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--6pvyxz+$zu*p-xe(2ku=f%l86whx+58p5qq_$$ec%o_mdd58h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app', '.pythonanywhere.com','.taskflow-ds4j.onrender.com']
 # On ajoutera les domaines de déploiement plus tard
 
 
