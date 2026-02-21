@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--6pvyxz+$zu*p-xe(2ku=f%l86whx+58p5qq_$$ec%o_mdd58h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app', '.pythonanywhere.com']
 # On ajoutera les domaines de déploiement plus tard
@@ -83,6 +83,11 @@ DATABASES = {
     }
 }
 
+# Pour Postgres (Render fournit l'URL via env var)
+import dj_database_url
+DATABASES = {
+    'default': dj_database_url.config(default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'), conn_max_age=600)
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -128,3 +133,4 @@ ALLOWED_HOSTS = ['adams842.pythonanywhere.com', '127.0.0.1']
 # Pour les static files (si tu en ajoutes plus tard)
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
